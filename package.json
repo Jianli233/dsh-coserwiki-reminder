@@ -1,0 +1,49 @@
+{
+  "name": "dsh-coserwiki-reminder",
+  "version": "1.0.0",
+  "description": "coserwiki（Coser百科）漫展活动面板：按城市筛选，关注嘉宾参演时标注，并在活动开始前 1 个月 / 1 周弹窗提醒；关注名单可在插件设置里修改。",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar-right",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "docs",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "coserwiki",
+    "cosplay",
+    "漫展",
+    "reminder"
+  ],
+  "engines": {
+    "dsh": "^0.2.3-alpha.2"
+  },
+  "license": "MIT"
+}

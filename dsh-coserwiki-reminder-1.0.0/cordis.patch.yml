@@ -1,0 +1,4 @@
+# dsh-coserwiki-reminder —— DSH bundle patch
+- insert:
+    - id: dsh-coserwiki-reminder
+      name: dsh-coserwiki-reminder

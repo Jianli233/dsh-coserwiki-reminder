@@ -1,6 +1,6 @@
-{
+﻿{
   "name": "dsh-coserwiki-reminder",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "coserwiki（Coser百科）漫展活动面板：按城市筛选，关注嘉宾参演时标注，并在活动开始前 1 个月 / 1 周弹窗提醒；关注名单可在插件设置里修改。",
   "type": "module",
   "main": "index.js",

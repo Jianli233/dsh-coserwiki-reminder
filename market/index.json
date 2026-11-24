@@ -1,0 +1,44 @@
+{
+  "format": 1,
+  "title": {
+    "en": "Jianli233 Plugins",
+    "zh": "Jianli233 插件"
+  },
+  "description": {
+    "en": "DSH plugins by Jianli233.",
+    "zh": "Jianli233 的 DSH 插件。"
+  },
+  "plugins": [
+    {
+      "name": "dsh-coserwiki-reminder",
+      "title": {
+        "en": "CoserWiki Event Radar",
+        "zh": "CoserWiki 漫展提醒"
+      },
+      "description": {
+        "en": "Browse coserwiki cosplay events by city. Watched cosplayers are highlighted, and events featuring them pop up one month and one week before they start. Edit the watchlist in Settings.",
+        "zh": "浏览 coserwiki 漫展活动并按城市筛选；关注的 coser 参演时会自动标注，并在活动开始前 1 个月和 1 周弹窗提醒。关注名单可在插件设置里修改。"
+      },
+      "icon": "icon.png",
+      "author": "Jianli233",
+      "homepage": "https://github.com/Jianli233/dsh-coserwiki-reminder#readme",
+      "repository": {
+        "url": "https://github.com/Jianli233/dsh-coserwiki-reminder"
+      },
+      "versions": [
+        {
+          "version": "1.1.0",
+          "publishTimestamp": 1795512988,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/Jianli233/dsh-coserwiki-reminder",
+            "commit": "1d73d3e53a5b1fc1ceb4f0afd09968bf992e0b55"
+          },
+          "engines": {
+            "dsh": "^0.2.3-alpha.2"
+          }
+        }
+      ]
+    }
+  ]
+}

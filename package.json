@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "dsh-coserwiki-reminder",
-  "version": "1.1.0",
-  "description": "coserwiki（Coser百科）漫展活动面板：按城市筛选，关注嘉宾参演时标注，并在活动开始前 1 个月 / 1 周弹窗提醒；关注名单可在插件设置里修改。",
+  "version": "1.0.0",
+  "description": "CoserWiki 漫展提醒：在 DSH 里一屏浏览 coserwiki 漫展活动、按城市筛选，关注喜欢的 Coser 达人；他们参演的活动会自动标注「关注」，并在开始前 1 个月 / 1 周各弹窗提醒一次。关注名单可在插件设置里修改。",
   "type": "module",
   "main": "index.js",
   "exports": {
@@ -40,7 +40,11 @@
     "coserwiki",
     "cosplay",
     "漫展",
-    "reminder"
+    "reminder",
+    "convention",
+    "events",
+    "notify",
+    "fan"
   ],
   "engines": {
     "dsh": "^0.2.3-alpha.2"

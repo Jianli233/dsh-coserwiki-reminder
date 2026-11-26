@@ -22,7 +22,7 @@ window.__ModuleLoader__.load({
 
     const CSS = `
 .cw-root{display:flex;flex-direction:column;height:100%;min-height:0;color:var(--dsw-alias-label-primary,#1f2329);font-size:13px;background:var(--dsw-alias-bg-layer-1,#fff)}
-:where(.cw-root,.cw-modal,.cw-settings){--cw-rose:#e0235f;--cw-rose-ink:#c2185b}
+:where(.cw-root,.cw-toast,.cw-settings){--cw-rose:#e0235f;--cw-rose-ink:#c2185b}
 .cw-page{max-width:860px;margin:0 auto;width:100%}
 .cw-head{display:flex;align-items:flex-start;gap:10px;padding:16px 18px 10px;border-bottom:1px solid var(--dsw-alias-border-l1,#eceef2)}
 .cw-side .cw-head{padding:12px 12px 8px}
@@ -32,13 +32,18 @@ window.__ModuleLoader__.load({
 .cw-sub a{color:inherit;text-decoration:none;border-bottom:1px dotted currentColor}
 .cw-grow{flex:1;min-width:0}
 .cw-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.cw-btn{border:1px solid var(--dsw-alias-border-l2,#d9dbe0);background:var(--dsw-alias-bg-layer-2,#f7f8fa);color:inherit;border-radius:7px;padding:4px 9px;font-size:12px;line-height:18px;cursor:pointer;white-space:nowrap}
+.cw-btn{border:1px solid var(--dsw-alias-border-l2,#d9dbe0);background:var(--dsw-alias-bg-layer-2,#f7f8fa);color:inherit;border-radius:7px;padding:4px 9px;font-size:12px;line-height:18px;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
 .cw-btn:hover{background:var(--dsw-alias-bg-layer-3,#fff)}
 .cw-btn:disabled{opacity:.55;cursor:default}
 .cw-btn-primary{border-color:transparent;background:var(--dsw-alias-state-business-primary,#3964fe);color:#fff}
 .cw-btn-primary:hover{background:var(--dsw-alias-state-business-primary,#3964fe);opacity:.9}
 .cw-chips{display:flex;gap:6px;flex-wrap:wrap;padding:10px 18px 4px}
 .cw-side .cw-chips{padding:8px 12px 2px;gap:5px}
+.cw-tools{display:flex;align-items:center;gap:8px;padding:8px 18px 0}
+.cw-side .cw-tools{padding:6px 12px 0}
+.cw-search{flex:1;min-width:0;box-sizing:border-box;padding:5px 9px;border-radius:7px;border:1px solid var(--dsw-alias-border-l2,#dfe2e8);background:transparent;color:inherit;font:inherit;font-size:12px;line-height:18px;outline:none}
+.cw-search:focus{border-color:var(--dsw-alias-state-business-primary,#3964fe)}
+.cw-search::placeholder{color:var(--dsw-alias-label-tertiary,#8a9099)}
 .cw-chip{border:1px solid var(--dsw-alias-border-l2,#dfe2e8);background:transparent;color:var(--dsw-alias-label-secondary,#5b6470);border-radius:999px;padding:2px 10px;font-size:12px;line-height:20px;cursor:pointer}
 .cw-chip:hover{border-color:var(--dsw-alias-state-business-primary,#3964fe);color:var(--dsw-alias-state-business-primary,#3964fe)}
 .cw-chip-on{background:var(--dsw-alias-state-business-primary,#3964fe);border-color:transparent;color:#fff}
@@ -53,10 +58,21 @@ window.__ModuleLoader__.load({
 .cw-section h3{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:12px;font-weight:600;color:var(--dsw-alias-label-tertiary,#8a9099);letter-spacing:.04em}
 .cw-section h3::after{content:'';flex:1;height:1px;background:var(--dsw-alias-border-l1,#eceef2)}
 .cw-list{display:flex;flex-direction:column;gap:7px}
-.cw-item{display:flex;gap:11px;padding:10px 11px;border:1px solid var(--dsw-alias-border-l2,#e6e8ec);border-radius:10px;background:var(--dsw-alias-bg-layer-2,#fafbfc);text-decoration:none;color:inherit;transition:border-color .12s ease,background .12s ease}
-.cw-item:hover{border-color:var(--dsw-alias-state-business-primary,#3964fe);background:var(--dsw-alias-bg-layer-3,#fff)}
-.cw-item-watch{border-color:rgba(224,35,95,.24);background:linear-gradient(90deg,rgba(224,35,95,.15),rgba(224,35,95,.04) 26%,rgba(224,35,95,0) 56%),var(--dsw-alias-bg-layer-3,#fff);box-shadow:inset 3px 0 0 0 var(--cw-rose)}
-.cw-item-watch:hover{border-color:rgba(224,35,95,.52);background:linear-gradient(90deg,rgba(224,35,95,.20),rgba(224,35,95,.05) 26%,rgba(224,35,95,0) 56%),var(--dsw-alias-bg-layer-3,#fff)}
+.cw-item-wrap{display:flex;flex-direction:column;border:1px solid var(--dsw-alias-border-l2,#e6e8ec);border-radius:10px;background:var(--dsw-alias-bg-layer-2,#fafbfc);transition:border-color .12s ease,background .12s ease;overflow:hidden}
+.cw-item-wrap:hover{border-color:var(--dsw-alias-state-business-primary,#3964fe);background:var(--dsw-alias-bg-layer-3,#fff)}
+.cw-item-wrap.cw-item-watch{border-color:rgba(224,35,95,.24);background:linear-gradient(90deg,rgba(224,35,95,.15),rgba(224,35,95,.04) 26%,rgba(224,35,95,0) 56%),var(--dsw-alias-bg-layer-3,#fff);box-shadow:inset 3px 0 0 0 var(--cw-rose)}
+.cw-item-wrap.cw-item-watch:hover{border-color:rgba(224,35,95,.52);background:linear-gradient(90deg,rgba(224,35,95,.20),rgba(224,35,95,.05) 26%,rgba(224,35,95,0) 56%),var(--dsw-alias-bg-layer-3,#fff)}
+.cw-item{display:flex;gap:11px;padding:10px 11px;text-decoration:none;color:inherit}
+.cw-item:hover .cw-name{color:var(--dsw-alias-state-business-primary,#3964fe)}
+.cw-item-wrap.cw-item-watch .cw-item:hover .cw-name{color:var(--cw-rose-ink)}
+.cw-roster-bar{display:flex;align-items:center;gap:6px;width:100%;box-sizing:border-box;padding:5px 11px 6px;border:0;border-top:1px dashed var(--dsw-alias-border-l1,#eceef2);background:transparent;color:var(--dsw-alias-label-tertiary,#8a9099);font-size:11.5px;line-height:16px;cursor:pointer;text-align:left}
+.cw-roster-bar:hover{color:var(--dsw-alias-state-business-primary,#3964fe)}
+.cw-roster-bar em{font-style:normal;margin-left:auto;opacity:.75}
+.cw-item-wrap.cw-item-watch .cw-roster-bar:hover{color:var(--cw-rose-ink)}
+.cw-roster{display:flex;flex-wrap:wrap;gap:5px;padding:8px 11px 10px;border-top:1px solid var(--dsw-alias-border-l1,#eceef2);background:var(--dsw-alias-bg-layer-1,rgba(255,255,255,.5))}
+.cw-guest{display:inline-block;padding:1px 7px;border-radius:999px;border:1px solid var(--dsw-alias-border-l2,#e6e8ec);font-size:11px;line-height:17px;color:var(--dsw-alias-label-secondary,#5b6470);background:var(--dsw-alias-bg-layer-2,#fafbfc)}
+.cw-guest-on{border-color:rgba(224,35,95,.42);background:rgba(224,35,95,.12);color:var(--cw-rose-ink);font-weight:600}
+.cw-guest-more{border-style:dashed;color:var(--dsw-alias-label-tertiary,#8a9099)}
 .cw-date{min-width:48px;flex-shrink:0;font-size:12px;line-height:1.35;font-weight:650;color:var(--dsw-alias-state-business-primary,#3964fe);display:flex;flex-direction:column;gap:1px;padding-top:1px}
 .cw-date span{font-weight:500;color:var(--dsw-alias-label-tertiary,#8a9099);font-size:11px}
 .cw-main{flex:1;min-width:0}
@@ -70,7 +86,8 @@ window.__ModuleLoader__.load({
 .cw-tag-watch{color:#fff;border-color:transparent;background:var(--cw-rose);font-weight:650}
 .cw-tag-soon{color:#b35c00;color:color-mix(in srgb,#ff9d4d 45%,var(--dsw-alias-label-primary,#1f2329));border-color:rgba(255,157,77,.42);background:rgba(255,157,77,.13)}
 .cw-empty{padding:34px 10px;text-align:center;color:var(--dsw-alias-label-tertiary,#8a9099);font-size:12px;line-height:1.7}
-.cw-error{margin:8px 18px 0;padding:7px 10px;border-radius:7px;background:var(--dsw-alias-state-error-bg,#fff1f0);color:var(--dsw-alias-state-error-primary,#d93026);font-size:12px;line-height:1.5}
+.cw-error{display:flex;align-items:center;gap:8px;margin:8px 18px 0;padding:7px 10px;border-radius:7px;background:var(--dsw-alias-state-error-bg,#fff1f0);color:var(--dsw-alias-state-error-primary,#d93026);font-size:12px;line-height:1.5}
+.cw-error button{margin-left:auto;flex-shrink:0;border:1px solid currentColor;background:transparent;color:inherit;border-radius:6px;padding:1px 8px;font-size:11.5px;line-height:18px;cursor:pointer}
 .cw-side .cw-error{margin:6px 12px 0}
 .cw-more{display:flex;justify-content:center;margin-top:12px}
 .cw-muted-link{color:var(--dsw-alias-label-tertiary,#8a9099);font-size:11.5px;text-decoration:none}
@@ -86,6 +103,18 @@ window.__ModuleLoader__.load({
 .cw-settings-add{display:flex;gap:8px;align-items:center}
 .cw-settings-add input{flex:1;min-width:0;padding:7px 10px;border-radius:8px;border:1px solid var(--dsw-alias-border-l2,#d9dbe0);background:var(--dsw-alias-bg-layer-1,#fff);color:inherit;font-size:13px;outline:none}
 .cw-settings-add input:focus{border-color:var(--cw-rose,#e0235f)}
+.cw-settings-label{font-size:12.5px;font-weight:600;margin:18px 0 7px;color:var(--dsw-alias-label-secondary,#5b6470)}
+.cw-node-chips{display:flex;flex-wrap:wrap;gap:6px}
+.cw-node{border:1px solid var(--dsw-alias-border-l2,#d9dbe0);background:transparent;color:var(--dsw-alias-label-secondary,#5b6470);border-radius:999px;padding:2px 10px;font-size:12px;line-height:20px;cursor:pointer}
+.cw-node:hover{border-color:rgba(224,35,95,.5);color:#a3164c}
+.cw-node-on{background:#c2185b;border-color:transparent;color:#fff}
+.cw-node-on:hover{background:#a3154b;color:#fff}
+.cw-settings-custom{display:flex;gap:8px;align-items:center;margin-top:8px}
+.cw-settings-custom input{width:92px;padding:5px 9px;border-radius:7px;border:1px solid var(--dsw-alias-border-l2,#d9dbe0);background:var(--dsw-alias-bg-layer-1,#fff);color:inherit;font-size:12.5px;outline:none}
+.cw-settings-custom input:focus{border-color:var(--cw-rose,#e0235f)}
+.cw-settings-custom button{border-radius:7px;padding:4px 10px;font-size:12px;line-height:18px;border:1px solid var(--dsw-alias-border-l2,#d9dbe0);background:var(--dsw-alias-bg-layer-2,#f7f8fa);color:inherit;cursor:pointer}
+.cw-settings-custom button:hover{background:var(--dsw-alias-bg-layer-3,#fff)}
+.cw-settings-preview{font-size:12px;color:var(--cw-rose-ink);color:color-mix(in srgb,var(--cw-rose) 52%,var(--dsw-alias-label-primary,#1f2329));margin-top:9px;line-height:1.65}
 .cw-settings-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 .cw-settings-actions button{border-radius:8px;padding:6px 12px;font-size:12.5px;line-height:18px;cursor:pointer;border:1px solid var(--dsw-alias-border-l2,#d9dbe0);background:var(--dsw-alias-bg-layer-2,#f7f8fa);color:inherit}
 .cw-settings-actions button:hover{background:var(--dsw-alias-bg-layer-3,#fff)}
@@ -95,21 +124,25 @@ window.__ModuleLoader__.load({
 .cw-settings-status{font-size:12px;margin-top:8px;color:var(--dsw-alias-label-tertiary,#8a9099)}
 .cw-settings-status.ok{color:#1a8f4a}
 .cw-settings-status.err{color:var(--dsw-alias-state-error-primary,#d93026)}
-.cw-modal-backdrop{position:fixed;inset:0;z-index:2147483000;background:rgba(12,14,24,.46);display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box}
-.cw-modal{position:relative;width:min(460px,100%);max-height:calc(100vh - 48px);overflow:auto;box-sizing:border-box;background:var(--dsw-alias-bg-layer-1,#fff);color:var(--dsw-alias-label-primary,#1f2329);border:1px solid rgba(224,35,95,.42);border-radius:16px;padding:22px 22px 18px;box-shadow:0 24px 70px rgba(0,0,0,.35)}
-.cw-modal-kicker{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:650;color:var(--cw-rose-ink);color:color-mix(in srgb,var(--cw-rose) 52%,var(--dsw-alias-label-primary,#1f2329));background:rgba(224,35,95,.14);border-radius:999px;padding:3px 10px}
-.cw-modal h3{margin:12px 0 6px;font-size:19px;line-height:1.35}
-.cw-modal-sub{color:var(--dsw-alias-label-secondary,#5b6470);font-size:13px;line-height:1.6}
-.cw-modal-watch{margin-top:10px;padding:8px 10px;border-radius:9px;background:rgba(224,35,95,.10);border:1px solid rgba(224,35,95,.34);color:var(--cw-rose-ink);color:color-mix(in srgb,var(--cw-rose) 52%,var(--dsw-alias-label-primary,#1f2329));font-size:13px;line-height:1.55;font-weight:550}
-.cw-modal-count{margin-top:10px;font-size:12.5px;color:var(--dsw-alias-label-tertiary,#8a9099)}
-.cw-modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
-.cw-modal-actions button{border-radius:9px;padding:8px 14px;font-size:13px;line-height:18px;cursor:pointer;border:1px solid var(--dsw-alias-border-l2,#d9dbe0);background:var(--dsw-alias-bg-layer-2,#f7f8fa);color:inherit}
-.cw-modal-actions button:hover{background:var(--dsw-alias-bg-layer-3,#fff)}
-.cw-modal-actions .cw-modal-primary{border-color:transparent;background:#c2185b;color:#fff}
-.cw-modal-actions .cw-modal-primary:hover{background:#a3154b}
-.cw-modal-close{position:absolute;top:10px;right:10px;width:28px;height:28px;border:0;border-radius:8px;background:transparent;color:var(--dsw-alias-label-tertiary,#8a9099);font-size:18px;line-height:1;cursor:pointer}
-.cw-modal-close:hover{background:var(--dsw-alias-bg-layer-2,#f0f1f4)}
-.cw-modal-queue{margin-top:8px;font-size:11.5px;color:var(--dsw-alias-label-tertiary,#8a9099);text-align:right}
+.cw-toasts{position:fixed;right:16px;bottom:16px;z-index:2147483000;display:flex;flex-direction:column;gap:9px;width:min(372px,calc(100vw - 32px));pointer-events:none;--cw-rose:#e0235f}
+.cw-toasts-more{align-self:flex-end;pointer-events:auto;border:1px solid var(--dsw-alias-border-l2,#d9dbe0);background:var(--dsw-alias-bg-layer-2,#f7f8fa);color:var(--dsw-alias-label-secondary,#5b6470);border-radius:999px;padding:2px 10px;font-size:11.5px;line-height:18px;cursor:pointer}
+.cw-toasts-more:hover{border-color:rgba(224,35,95,.5);color:#a3164c}
+.cw-toast{position:relative;pointer-events:auto;display:flex;flex-direction:column;padding:11px 32px 11px 13px;border-radius:13px;border:1px solid rgba(224,35,95,.30);background:var(--dsw-alias-bg-layer-1,#fff);color:var(--dsw-alias-label-primary,#1f2329);box-shadow:0 18px 44px rgba(10,12,20,.26),0 2px 8px rgba(10,12,20,.10);animation:cw-toast-in .24s cubic-bezier(.2,.9,.3,1) both}
+.cw-toast::before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:var(--cw-rose)}
+.cw-toast-out{animation:cw-toast-out .18s ease-in forwards}
+@keyframes cw-toast-in{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes cw-toast-out{to{opacity:0;transform:translateY(10px) scale(.99)}}
+.cw-toast-kicker{font-size:11px;font-weight:650;letter-spacing:.02em;color:#a3164c;color:color-mix(in srgb,var(--cw-rose) 58%,var(--dsw-alias-label-primary,#1f2329))}
+.cw-toast-title{margin-top:3px;font-size:13.5px;font-weight:650;line-height:1.4;word-break:break-word}
+.cw-toast-meta{margin-top:3px;font-size:11.5px;line-height:1.5;color:var(--dsw-alias-label-tertiary,#8a9099);word-break:break-word}
+.cw-toast-watch{margin-top:3px;font-size:11.5px;line-height:1.5;font-weight:550;color:#a3164c;color:color-mix(in srgb,var(--cw-rose) 55%,var(--dsw-alias-label-primary,#1f2329))}
+.cw-toast-actions{display:flex;align-items:center;gap:8px;margin-top:10px}
+.cw-toast-actions button{border-radius:8px;padding:4px 11px;font-size:12px;line-height:18px;cursor:pointer;border:1px solid var(--dsw-alias-border-l2,#d9dbe0);background:transparent;color:inherit}
+.cw-toast-actions button:hover{background:var(--dsw-alias-bg-layer-2,#f0f1f4)}
+.cw-toast-actions .cw-toast-primary{margin-left:auto;border-color:transparent;background:#c2185b;color:#fff}
+.cw-toast-actions .cw-toast-primary:hover{background:#a3154b;color:#fff}
+.cw-toast-close{position:absolute;top:6px;right:6px;width:24px;height:24px;padding:0;border:0;border-radius:7px;background:transparent;color:var(--dsw-alias-label-tertiary,#8a9099);font-size:15px;line-height:1;cursor:pointer}
+.cw-toast-close:hover{background:var(--dsw-alias-bg-layer-2,#f0f1f4);color:var(--dsw-alias-label-primary,#1f2329)}
 `
 
     function installStyles() {
@@ -127,6 +160,31 @@ window.__ModuleLoader__.load({
       const value = String(city || '').trim()
       if (!value) return '其他'
       return value.replace(/市$/, '')
+    }
+
+    /** 名字归一化：全角转半角、忽略大小写和空白，和服务端保持一致 */
+    function foldName(value) {
+      return String(value || '')
+        .normalize('NFKC')
+        .toLowerCase()
+        .replace(/\s+/g, '')
+    }
+
+    const FILTER_KEY = 'dsh-coserwiki-filter'
+    const FILTER_ALL = '全部'
+
+    function readFilter() {
+      try {
+        return localStorage.getItem(FILTER_KEY) || FILTER_ALL
+      } catch {
+        return FILTER_ALL
+      }
+    }
+
+    function saveFilter(value) {
+      try {
+        localStorage.setItem(FILTER_KEY, value)
+      } catch { /* ignore */ }
     }
 
     function pad2(n) {
@@ -180,36 +238,63 @@ window.__ModuleLoader__.load({
     }
 
     function Item({ event, isNew }) {
+      const [rosterOpen, setRosterOpen] = React.useState(false)
       const status = statusOf(event)
       const end = event.end && event.end !== event.start ? ' → ' + formatDay(event.end) : ''
       const days = typeof event.daysLeft === 'number' ? event.daysLeft : daysUntilLocal(event.start)
       const soon = Number.isFinite(days) && days >= 0 && days <= 30 ? (days === 0 ? '今天' : '还有 ' + days + ' 天') : ''
       const watchedNames = Array.isArray(event.watchedNames) ? event.watchedNames : []
       const watchDays = formatWatchDays(event.watchedDays)
-      return h('a', {
-        className: 'cw-item' + (event.hasWatched ? ' cw-item-watch' : ''),
-        href: event.url,
-        target: '_blank',
-        rel: 'noreferrer',
-        title: event.title,
-      },
-        h('div', { className: 'cw-date' }, formatDay(event.start), end ? h('span', {}, end) : null),
-        h('div', { className: 'cw-main' },
-          h('div', { className: 'cw-name' }, event.title,
-            isNew ? h(Tag, { className: 'cw-tag-new' }, '新') : null,
-            event.hasWatched ? h(Tag, { className: 'cw-tag-watch' }, '关注') : null,
-            soon ? h(Tag, { className: 'cw-tag-soon' }, soon) : null,
-            status === 'now' ? h(Tag, { className: 'cw-tag-now' }, '进行中') : null,
-            event.special ? h(Tag, { className: 'cw-tag-special' }, '超级活动') : null,
+      const guests = Array.isArray(event.guests) ? event.guests : []
+      const guestCount = typeof event.guestCount === 'number' ? event.guestCount : guests.length
+      const watchedKeys = new Set(watchedNames.map(foldName))
+      const meta = [[cityName(event.city), event.venue].filter(Boolean).join(' · '), guestCount > 0 ? guestCount + ' 位嘉宾' : '']
+        .filter(Boolean)
+        .join(' · ')
+      return h('div', { className: 'cw-item-wrap' + (event.hasWatched ? ' cw-item-watch' : '') },
+        h('a', {
+          className: 'cw-item',
+          href: event.url,
+          target: '_blank',
+          rel: 'noreferrer',
+          title: event.title,
+        },
+          h('div', { className: 'cw-date' }, formatDay(event.start), end ? h('span', {}, end) : null),
+          h('div', { className: 'cw-main' },
+            h('div', { className: 'cw-name' }, event.title,
+              isNew ? h(Tag, { className: 'cw-tag-new' }, '新') : null,
+              event.hasWatched ? h(Tag, { className: 'cw-tag-watch' }, '关注') : null,
+              soon ? h(Tag, { className: 'cw-tag-soon' }, soon) : null,
+              status === 'now' ? h(Tag, { className: 'cw-tag-now' }, '进行中') : null,
+              event.special ? h(Tag, { className: 'cw-tag-special' }, '超级活动') : null,
+            ),
+            h('div', { className: 'cw-meta' }, meta),
+            event.hasWatched
+              ? h('div', { className: 'cw-watch-line' },
+                  WATCH_LABEL + '：' + (watchedNames.length ? watchedNames.join('、') : '') + (watchDays ? ' · ' + watchDays : ''))
+              : null,
           ),
-          h('div', { className: 'cw-meta' },
-            [cityName(event.city), event.venue].filter(Boolean).join(' · '),
-          ),
-          event.hasWatched
-            ? h('div', { className: 'cw-watch-line' },
-                WATCH_LABEL + '：' + (watchedNames.length ? watchedNames.join('、') : '') + (watchDays ? ' · ' + watchDays : ''))
-            : null,
         ),
+        guestCount > 0
+          ? h('button', {
+              type: 'button',
+              className: 'cw-roster-bar',
+              onClick: () => setRosterOpen((value) => !value),
+              'aria-expanded': rosterOpen,
+              title: rosterOpen ? '收起参演名单' : '展开参演名单',
+            }, rosterOpen ? '收起名单' : '参演名单', h('em', {}, guestCount + ' 人'))
+          : null,
+        rosterOpen && guests.length
+          ? h('div', { className: 'cw-roster' },
+              ...guests.map((name) => h('span', {
+                key: name,
+                className: 'cw-guest' + (watchedKeys.has(foldName(name)) ? ' cw-guest-on' : ''),
+              }, name)),
+              guests.length < guestCount
+                ? h('span', { className: 'cw-guest cw-guest-more' }, '等 ' + guestCount + ' 人')
+                : null,
+            )
+          : null,
       )
     }
 
@@ -227,8 +312,14 @@ window.__ModuleLoader__.load({
       const side = variant === 'side'
       const [data, setData] = React.useState({ loading: true, events: [], newIds: [], updatedAt: '', error: '' })
       const [busy, setBusy] = React.useState(false)
-      const [city, setCity] = React.useState('全部')
+      const [city, setCity] = React.useState(readFilter)
+      const [query, setQuery] = React.useState('')
       const [showPast, setShowPast] = React.useState(false)
+
+      const chooseCity = (value) => {
+        setCity(value)
+        saveFilter(value)
+      }
 
       const load = React.useCallback(async (force) => {
         if (force) setBusy(true)
@@ -272,6 +363,16 @@ window.__ModuleLoader__.load({
 
       const events = data.events || []
       const watchedEvents = events.filter((event) => event.hasWatched)
+
+      // 记住的筛选条件如果对不上了（那座城市没活动了），自动回到「全部」
+      React.useEffect(() => {
+        if (!events.length || city === FILTER_ALL || city === WATCH_FILTER) return
+        if (!events.some((event) => cityName(event.city) === city)) {
+          setCity(FILTER_ALL)
+          saveFilter(FILTER_ALL)
+        }
+      }, [events, city])
+
       const cityCount = new Map()
       for (const event of events) {
         const name = cityName(event.city)
@@ -283,29 +384,43 @@ window.__ModuleLoader__.load({
         return b[1] - a[1] || a[0].localeCompare(b[0], 'zh-CN')
       })
 
-      const visible = city === '全部'
+      const q = query.trim().toLowerCase()
+      const matches = (event) => {
+        if (!q) return true
+        const hay = [
+          event.title,
+          event.city,
+          event.province,
+          event.venue,
+          ...(Array.isArray(event.guests) ? event.guests : []),
+          ...(Array.isArray(event.watchedNames) ? event.watchedNames : []),
+        ].join(' ').toLowerCase()
+        return hay.includes(q)
+      }
+      const byCity = city === FILTER_ALL
         ? events
         : city === WATCH_FILTER
           ? watchedEvents
           : events.filter((event) => cityName(event.city) === city)
+      const visible = byCity.filter(matches)
       const now = visible.filter((event) => statusOf(event) === 'now')
       const upcoming = visible.filter((event) => statusOf(event) === 'future')
       const past = visible.filter((event) => statusOf(event) === 'past')
 
       const chips = [
         h('button', {
-          key: '全部',
+          key: FILTER_ALL,
           type: 'button',
-          className: 'cw-chip' + (city === '全部' ? ' cw-chip-on' : ''),
-          onClick: () => setCity('全部'),
-        }, '全部', h('em', {}, String(events.length))),
+          className: 'cw-chip' + (city === FILTER_ALL ? ' cw-chip-on' : ''),
+          onClick: () => chooseCity(FILTER_ALL),
+        }, FILTER_ALL, h('em', {}, String(events.length))),
       ]
       if (watchedEvents.length > 0) {
         chips.push(h('button', {
           key: WATCH_FILTER,
           type: 'button',
           className: 'cw-chip cw-chip-watch' + (city === WATCH_FILTER ? ' cw-chip-on' : ''),
-          onClick: () => setCity(WATCH_FILTER),
+          onClick: () => chooseCity(WATCH_FILTER),
           title: '只看关注嘉宾参演的活动',
         }, WATCH_LABEL, h('em', {}, String(watchedEvents.length))))
       }
@@ -314,9 +429,17 @@ window.__ModuleLoader__.load({
           key: name,
           type: 'button',
           className: 'cw-chip' + (city === name ? ' cw-chip-on' : ''),
-          onClick: () => setCity(name),
+          onClick: () => chooseCity(name),
         }, name, h('em', {}, String(count))))
       }
+
+      const emptyText = q
+        ? '没有搜到「' + query.trim() + '」，换个关键词试试'
+        : city === WATCH_FILTER
+          ? '暂时没有关注嘉宾参演的活动'
+          : city === FILTER_ALL
+            ? '暂时没有活动数据'
+            : '这个城市暂时没有活动'
 
       return h('div', { className: 'cw-root ' + (side ? 'cw-side' : 'cw-page') },
         h('div', { className: 'cw-head' },
@@ -330,6 +453,12 @@ window.__ModuleLoader__.load({
             ),
           ),
           h('div', { className: 'cw-actions' },
+            h('a', {
+              className: 'cw-btn',
+              href: '/coserwiki/calendar.ics' + (watchedEvents.length > 0 ? '' : '?scope=all'),
+              download: 'coserwiki-events.ics',
+              title: watchedEvents.length > 0 ? '把关注嘉宾的场次导出成日历文件' : '把所有未来场次导出成日历文件',
+            }, '日历'),
             data.newIds.length > 0 ? h('button', {
               type: 'button',
               className: 'cw-btn',
@@ -344,13 +473,23 @@ window.__ModuleLoader__.load({
             }, busy ? '刷新中…' : '刷新'),
           ),
         ),
+        h('div', { className: 'cw-tools' },
+          h('input', {
+            className: 'cw-search',
+            type: 'search',
+            value: query,
+            placeholder: '搜活动、场馆或嘉宾…',
+            onChange: (event) => setQuery(event.target.value),
+          }),
+        ),
         h('div', { className: 'cw-chips' }, ...chips),
-        data.error ? h('div', { className: 'cw-error' }, data.error) : null,
+        data.error ? h('div', { className: 'cw-error' }, data.error,
+          h('button', { type: 'button', onClick: () => load(true) }, '重试')) : null,
         h('div', { className: 'cw-scroll' },
           data.loading
             ? h('div', { className: 'cw-loading' }, '正在读取 coserwiki 活动…')
             : (now.length === 0 && upcoming.length === 0 && past.length === 0)
-              ? h('div', { className: 'cw-empty' }, city === WATCH_FILTER ? '暂时没有关注嘉宾参演的活动' : '这个城市暂时没有活动', h('br'), '换个筛选看看，或点右上角刷新')
+              ? h('div', { className: 'cw-empty' }, emptyText, h('br'), '换个筛选看看，或点右上角刷新')
               : h('div', {},
                   h(Section, { title: '进行中', events: now, newIds: data.newIds }),
                   h(Section, { title: '即将开始', events: upcoming, newIds: data.newIds }),
@@ -378,10 +517,23 @@ window.__ModuleLoader__.load({
       )
     }
 
+    const REMINDER_PRESETS = [30, 14, 7, 3, 1, 0]
+    const MAX_REMINDER_NODES = 6
+
+    function nodeLabel(days) {
+      if (days === 0) return '当天'
+      if (days % 30 === 0) return days / 30 + ' 个月'
+      if (days % 7 === 0) return days / 7 + ' 周'
+      return days + ' 天'
+    }
+
     function SettingsSection() {
       const [names, setNames] = React.useState([])
+      const [days, setDays] = React.useState([30, 7])
       const [defaults, setDefaults] = React.useState([])
+      const [defaultDays, setDefaultDays] = React.useState([30, 7])
       const [input, setInput] = React.useState('')
+      const [custom, setCustom] = React.useState('')
       const [status, setStatus] = React.useState({ text: '', kind: '' })
       const [busy, setBusy] = React.useState(false)
 
@@ -395,7 +547,13 @@ window.__ModuleLoader__.load({
           .then((json) => {
             if (!alive) return
             setNames(Array.isArray(json.watchedGuests) ? json.watchedGuests : [])
+            if (Array.isArray(json.reminderDays) && json.reminderDays.length) {
+              setDays(json.reminderDays.slice().sort((a, b) => b - a))
+            }
             setDefaults(Array.isArray(json.defaults) ? json.defaults : [])
+            if (Array.isArray(json.defaultReminderDays) && json.defaultReminderDays.length) {
+              setDefaultDays(json.defaultReminderDays.slice().sort((a, b) => b - a))
+            }
           })
           .catch((err) => {
             if (alive) setStatus({ text: '读取设置失败：' + String((err && err.message) || err), kind: 'err' })
@@ -426,9 +584,49 @@ window.__ModuleLoader__.load({
         setNames((prev) => prev.filter((item) => item !== name))
       }
 
+      const toggleDay = (value) => {
+        if (days.includes(value)) {
+          if (days.length === 1) {
+            setStatus({ text: '至少留一个提醒时间', kind: 'err' })
+            return
+          }
+          setDays(days.filter((item) => item !== value))
+        } else {
+          if (days.length >= MAX_REMINDER_NODES) {
+            setStatus({ text: '最多 ' + MAX_REMINDER_NODES + ' 个提醒时间', kind: 'err' })
+            return
+          }
+          setDays([...days, value].sort((a, b) => b - a))
+        }
+        setStatus({ text: '', kind: '' })
+      }
+
+      const addCustom = () => {
+        const value = Math.round(Number(custom))
+        if (!Number.isFinite(value) || value < 0 || value > 365) {
+          setStatus({ text: '提醒天数填 0–365 之间的整数', kind: 'err' })
+          return
+        }
+        if (days.includes(value)) {
+          setStatus({ text: '这个时间点已经有了', kind: 'err' })
+          return
+        }
+        if (days.length >= MAX_REMINDER_NODES) {
+          setStatus({ text: '最多 ' + MAX_REMINDER_NODES + ' 个提醒时间', kind: 'err' })
+          return
+        }
+        setDays([...days, value].sort((a, b) => b - a))
+        setCustom('')
+        setStatus({ text: '', kind: '' })
+      }
+
       const save = async () => {
         if (names.length === 0) {
           setStatus({ text: '至少保留一位嘉宾', kind: 'err' })
+          return
+        }
+        if (days.length === 0) {
+          setStatus({ text: '至少留一个提醒时间', kind: 'err' })
           return
         }
         setBusy(true)
@@ -437,11 +635,14 @@ window.__ModuleLoader__.load({
           const res = await fetch('/coserwiki/settings', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ watchedGuests: names }),
+            body: JSON.stringify({ watchedGuests: names, reminderDays: days }),
           })
           const json = await res.json()
           if (!res.ok) throw new Error(json.error || ('HTTP ' + res.status))
           setNames(Array.isArray(json.watchedGuests) ? json.watchedGuests : names)
+          if (Array.isArray(json.reminderDays) && json.reminderDays.length) {
+            setDays(json.reminderDays.slice().sort((a, b) => b - a))
+          }
           setStatus({ text: '已保存，立即生效', kind: 'ok' })
         } catch (err) {
           setStatus({ text: '保存失败：' + String((err && err.message) || err), kind: 'err' })
@@ -450,9 +651,12 @@ window.__ModuleLoader__.load({
         }
       }
 
+      const ordered = days.slice().sort((a, b) => b - a)
+
       return h('div', { className: 'cw-settings' },
-        h('h3', {}, '漫展提醒 · 关注嘉宾'),
-        h('p', { className: 'cw-settings-hint' }, '有这些嘉宾参演的活动，会在开始前 1 个月和 1 周弹窗提醒；活动列表里也会标「关注」。'),
+        h('h3', {}, '漫展提醒'),
+        h('p', { className: 'cw-settings-hint' }, '关注的 coser 参演活动时，会在下面这些时间点各提醒一次。'),
+        h('div', { className: 'cw-settings-label' }, '关注嘉宾'),
         h('div', { className: 'cw-settings-chips' },
           names.length
             ? names.map((name) => h('span', { className: 'cw-settings-chip', key: name }, name,
@@ -473,18 +677,48 @@ window.__ModuleLoader__.load({
           }),
           h('button', { type: 'button', onClick: add }, '添加'),
         ),
+        h('div', { className: 'cw-settings-label' }, '提醒时间'),
+        h('div', { className: 'cw-node-chips' },
+          ...REMINDER_PRESETS.map((value) => h('button', {
+            key: value,
+            type: 'button',
+            className: 'cw-node' + (days.includes(value) ? ' cw-node-on' : ''),
+            'aria-pressed': days.includes(value),
+            onClick: () => toggleDay(value),
+          }, nodeLabel(value))),
+        ),
+        h('div', { className: 'cw-settings-custom' },
+          h('input', {
+            type: 'number',
+            min: 0,
+            max: 365,
+            value: custom,
+            placeholder: '自定义天数',
+            onChange: (event) => setCustom(event.target.value),
+            onKeyDown: (event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault()
+                addCustom()
+              }
+            },
+          }),
+          h('button', { type: 'button', onClick: addCustom }, '添加'),
+        ),
+        h('div', { className: 'cw-settings-preview' },
+          '当前：活动开始前 ' + (ordered.length ? ordered.map(nodeLabel).join('、') : '（还没选）') + ' 各提醒一次'),
         h('div', { className: 'cw-settings-actions' },
           h('button', {
             type: 'button',
             className: 'cw-settings-primary',
             disabled: busy,
             onClick: save,
-          }, busy ? '保存中…' : '保存关注名单'),
+          }, busy ? '保存中…' : '保存设置'),
           h('button', {
             type: 'button',
             disabled: busy,
             onClick: () => {
               setNames(defaults.slice())
+              setDays(defaultDays.slice().sort((a, b) => b - a))
               setStatus({ text: '已恢复默认，记得保存', kind: '' })
             },
           }, '恢复默认'),
@@ -534,54 +768,106 @@ window.__ModuleLoader__.load({
       } catch { /* ignore */ }
     }
 
-    function installReminderModal(openEvents) {
-      if (typeof document === 'undefined') return () => {}
-      // 清理旧版调试标记 / HMR 残留弹窗
+    const SNOOZE_STORAGE = 'dsh-coserwiki-snoozed-v1'
+    const SNOOZE_MS = 30 * 60 * 1000
+    const TOAST_LIMIT = 3
+
+    function readSnoozed() {
       try {
-        for (const node of document.querySelectorAll('.cw-modal-backdrop')) node.remove()
-        for (const node of document.querySelectorAll('div')) {
-          if (node.childElementCount === 0 && node.textContent === 'COSER MODAL TEST') node.remove()
+        const raw = localStorage.getItem(SNOOZE_STORAGE)
+        const parsed = raw ? JSON.parse(raw) : {}
+        const now = Date.now()
+        const out = {}
+        for (const [key, until] of Object.entries(parsed && typeof parsed === 'object' ? parsed : {})) {
+          if (typeof until === 'number' && until > now) out[key] = until
         }
+        return out
+      } catch {
+        return {}
+      }
+    }
+
+    function saveSnoozed(map) {
+      try {
+        localStorage.setItem(SNOOZE_STORAGE, JSON.stringify(map))
       } catch { /* ignore */ }
+    }
+
+    /** 30 → 1 个月、7 → 1 周、3 → 3 天、0 → 当天 */
+    function milestoneLabel(threshold) {
+      const days = Number(threshold)
+      if (!Number.isFinite(days) || days < 0) return ''
+      if (days === 0) return '当天'
+      if (days % 30 === 0) return days / 30 + ' 个月'
+      if (days % 7 === 0) return days / 7 + ' 周'
+      return days + ' 天'
+    }
+
+    function thresholdOf(reminder) {
+      const direct = Number(reminder && reminder.threshold)
+      if (Number.isFinite(direct)) return direct
+      const match = String((reminder && reminder.milestone) || '').match(/\d+/)
+      return match ? Number(match[0]) : 0
+    }
+
+    function installReminderToasts(openEvents) {
+      if (typeof document === 'undefined') return () => {}
+      // 清理旧版残留（1.2 的全屏弹窗）
+      try {
+        for (const node of document.querySelectorAll('.cw-modal-backdrop, .cw-toasts')) node.remove()
+      } catch { /* ignore */ }
+
       const state = {
-        current: null,
-        queue: [],
         acked: readAcked(),
-        root: null,
+        snoozed: readSnoozed(),
+        container: null,
+        more: null,
+        nodes: new Map(),
+        reminders: [],
         timer: null,
         stopped: false,
-        nextTimer: null,
       }
 
       const keyOf = (reminder) => reminder.eventId + ':' + reminder.milestone
 
-      const removeModal = () => {
-        if (state.root) {
-          state.root.remove()
-          state.root = null
+      const ensureContainer = () => {
+        if (state.container && document.body.contains(state.container)) return state.container
+        const box = dom('div', 'cw-toasts')
+        const more = dom('button', 'cw-toasts-more', '')
+        more.type = 'button'
+        more.style.display = 'none'
+        more.addEventListener('click', () => { try { openEvents() } catch { /* ignore */ } })
+        box.appendChild(more)
+        document.body.appendChild(box)
+        state.container = box
+        state.more = more
+        return box
+      }
+
+      const removeNode = (key) => {
+        const node = state.nodes.get(key)
+        if (!node) return
+        state.nodes.delete(key)
+        node.classList.add('cw-toast-out')
+        setTimeout(() => { try { node.remove() } catch { /* ignore */ } }, 200)
+      }
+
+      const updateMore = (count) => {
+        if (!state.more) return
+        if (count > 0) {
+          state.more.textContent = '还有 ' + count + ' 条提醒 · 打开面板'
+          state.more.style.display = ''
+        } else {
+          state.more.style.display = 'none'
         }
-        state.current = null
-      }
-
-      const showNext = () => {
-        if (state.stopped || state.current || state.root) return
-        const next = state.queue.find((reminder) => !state.acked.has(keyOf(reminder)))
-        if (!next) return
-        state.current = next
-        render(next)
-      }
-
-      const hideAndContinue = () => {
-        removeModal()
-        if (state.nextTimer) clearTimeout(state.nextTimer)
-        state.nextTimer = setTimeout(showNext, 350)
       }
 
       const ack = async (reminder) => {
-        state.acked.add(keyOf(reminder))
+        const key = keyOf(reminder)
+        state.acked.add(key)
         saveAcked(state.acked)
-        state.queue = state.queue.filter((item) => keyOf(item) !== keyOf(reminder))
-        hideAndContinue()
+        removeNode(key)
+        sync(state.reminders)
         try {
           await fetch('/coserwiki/reminders/ack', {
             method: 'POST',
@@ -591,66 +877,64 @@ window.__ModuleLoader__.load({
         } catch { /* 本地已记，下次轮询服务器还会返回，但 localStorage 会挡掉 */ }
       }
 
-      const render = (reminder) => {
-        const backdrop = dom('div', 'cw-modal-backdrop')
-        backdrop.style.position = 'fixed'
-        backdrop.style.top = '0'
-        backdrop.style.left = '0'
-        backdrop.style.width = '100vw'
-        backdrop.style.height = '100vh'
-        backdrop.style.zIndex = '2147483000'
-        backdrop.style.background = 'transparent'
-        backdrop.style.display = 'block'
-        backdrop.style.pointerEvents = 'none'
-        backdrop.style.padding = '0'
-        backdrop.style.boxSizing = 'border-box'
-        const card = dom('div', 'cw-modal')
-        card.style.position = 'fixed'
-        card.style.left = '16px'
-        card.style.top = '16px'
-        card.style.transform = 'none'
-        card.style.width = 'min(420px, calc(100vw - 32px))'
-        card.style.zIndex = '2147483001'
-        card.style.maxHeight = 'calc(100vh - 32px)'
-        card.style.overflow = 'auto'
-        card.style.pointerEvents = 'auto'
-        backdrop.appendChild(card)
+      const snooze = (reminder) => {
+        const key = keyOf(reminder)
+        state.snoozed[key] = Date.now() + SNOOZE_MS
+        saveSnoozed(state.snoozed)
+        removeNode(key)
+        sync(state.reminders)
+      }
 
-        const close = dom('button', 'cw-modal-close', '×')
-        close.type = 'button'
-        close.title = '关闭并标记已读'
-        close.addEventListener('click', () => { ack(reminder) })
-        card.appendChild(close)
+      const isSnoozed = (key) => {
+        const until = state.snoozed[key]
+        if (!until) return false
+        if (until > Date.now()) return true
+        delete state.snoozed[key]
+        saveSnoozed(state.snoozed)
+        return false
+      }
 
-        const kicker = dom('div', 'cw-modal-kicker',
-          WATCH_LABEL + ' 参演提醒 · 提前' + (reminder.milestone === '7d' ? '1 周' : '1 个月'))
-        card.appendChild(kicker)
+      const refreshMore = () => {
+        const wanted = state.reminders.filter((reminder) => !state.acked.has(keyOf(reminder)) && !isSnoozed(keyOf(reminder)))
+        updateMore(Math.max(0, wanted.length - state.nodes.size))
+      }
 
-        card.appendChild(dom('h3', '', reminder.title))
+      const buildToast = (reminder) => {
+        const card = dom('div', 'cw-toast')
+        card.setAttribute('role', 'status')
+        const threshold = thresholdOf(reminder)
+        const label = milestoneLabel(threshold)
+        const days = typeof reminder.daysLeft === 'number' ? reminder.daysLeft : daysUntilLocal(reminder.start)
+        const countdown = days === 0 ? '今天开始' : days > 0 ? '还有 ' + days + ' 天' : '已开始'
+        card.appendChild(dom('div', 'cw-toast-kicker',
+          WATCH_LABEL + ' · ' + (label ? '提前 ' + label : '提醒') + ' · ' + countdown))
+        card.appendChild(dom('div', 'cw-toast-title', reminder.title || ''))
 
-        const parts = []
         const range = reminder.end && reminder.end !== reminder.start
           ? formatDay(reminder.start) + ' – ' + formatDay(reminder.end)
           : formatDay(reminder.start)
-        parts.push(range)
-        if (reminder.city) parts.push(cityName(reminder.city))
-        if (reminder.venue) parts.push(reminder.venue)
-        card.appendChild(dom('div', 'cw-modal-sub', parts.join(' · ')))
+        const meta = [range, reminder.city ? cityName(reminder.city) : '', reminder.venue || ''].filter(Boolean).join(' · ')
+        if (meta) card.appendChild(dom('div', 'cw-toast-meta', meta))
 
         const watchNames = Array.isArray(reminder.watchedNames) ? reminder.watchedNames : []
         const watchDays = formatWatchDays(reminder.watchedDays)
-        card.appendChild(dom('div', 'cw-modal-watch',
-          WATCH_LABEL + '：' + (watchNames.length ? watchNames.join('、') : '') + (watchDays ? ' · ' + watchDays : '')))
+        if (watchNames.length || watchDays) {
+          card.appendChild(dom('div', 'cw-toast-watch',
+            (watchNames.length ? watchNames.join('、') : WATCH_LABEL) + (watchDays ? ' · ' + watchDays : '')))
+        }
 
-        const days = typeof reminder.daysLeft === 'number' ? reminder.daysLeft : daysUntilLocal(reminder.start)
-        const countdown = days === 0 ? '就是今天开始' : days > 0 ? '距开始还有 ' + days + ' 天' : '活动已经开始'
-        card.appendChild(dom('div', 'cw-modal-count', countdown + ' · 点「查看活动」直接打开漫展列表'))
+        const close = dom('button', 'cw-toast-close', '×')
+        close.type = 'button'
+        close.title = '稍后 30 分钟再提醒'
+        close.setAttribute('aria-label', '稍后提醒')
+        close.addEventListener('click', () => snooze(reminder))
+        card.appendChild(close)
 
-        const actions = dom('div', 'cw-modal-actions')
-        const later = dom('button', '', '知道了')
+        const actions = dom('div', 'cw-toast-actions')
+        const later = dom('button', '', '稍后提醒')
         later.type = 'button'
-        later.addEventListener('click', () => { ack(reminder) })
-        const open = dom('button', 'cw-modal-primary', '查看活动')
+        later.addEventListener('click', () => snooze(reminder))
+        const open = dom('button', 'cw-toast-primary', '查看活动')
         open.type = 'button'
         open.addEventListener('click', () => {
           ack(reminder)
@@ -660,40 +944,53 @@ window.__ModuleLoader__.load({
         actions.appendChild(open)
         card.appendChild(actions)
 
-        if (state.queue.length > 1) {
-          card.appendChild(dom('div', 'cw-modal-queue', '还有 ' + (state.queue.length - 1) + ' 条提醒'))
-        }
-
-        state.root = backdrop
-        document.body.appendChild(backdrop)
-
         try {
           if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
             const note = new Notification(WATCH_LABEL + ' 参演提醒', {
-              body: reminder.title + ' · ' + range + (watchNames.length ? ' · ' + watchNames.join('、') : ''),
+              body: (reminder.title || '') + (reminder.city ? ' · ' + cityName(reminder.city) : ''),
               tag: keyOf(reminder),
             })
             note.onclick = () => { try { window.focus() } catch { /* ignore */ } }
           }
         } catch { /* ignore */ }
+
+        return card
+      }
+
+      const sync = (pending) => {
+        state.reminders = pending
+        const wanted = pending.filter((reminder) => !state.acked.has(keyOf(reminder)) && !isSnoozed(keyOf(reminder)))
+        const visible = wanted.slice(0, TOAST_LIMIT)
+        const visibleKeys = new Set(visible.map(keyOf))
+
+        for (const key of [...state.nodes.keys()]) {
+          if (!visibleKeys.has(key)) removeNode(key)
+        }
+        if (visible.length > 0) {
+          const box = ensureContainer()
+          for (const reminder of visible) {
+            const key = keyOf(reminder)
+            if (state.nodes.has(key)) continue
+            const node = buildToast(reminder)
+            state.nodes.set(key, node)
+            box.appendChild(node)
+          }
+        }
+        if (state.more && state.container && state.container.firstChild !== state.more) {
+          state.container.insertBefore(state.more, state.container.firstChild)
+        }
+        refreshMore()
       }
 
       const poll = async () => {
         if (state.stopped) return
         try {
-          const res = await fetch('/coserwiki/data', { cache: 'no-store' })
+          // 只取提醒列表，别每分钟拖一整页活动数据
+          const res = await fetch('/coserwiki/reminders', { cache: 'no-store' })
           if (!res.ok) return
           const json = await res.json()
           const pending = Array.isArray(json.reminders) ? json.reminders : []
-          state.queue = pending.filter((reminder) => !state.acked.has(keyOf(reminder)))
-          try {
-            if (!state.current && !state.root) showNext()
-          } catch { /* ignore */ }
-          if (state.current && !state.queue.some((reminder) => keyOf(reminder) === keyOf(state.current))) {
-            // 服务器已不再返回当前提醒（可能已在别处标记）
-            removeModal()
-            showNext()
-          }
+          sync(pending)
         } catch { /* ignore */ }
       }
 
@@ -701,16 +998,31 @@ window.__ModuleLoader__.load({
         if (document.visibilityState === 'visible') poll()
       }
 
+      const onKeyDown = (event) => {
+        if (event.key !== 'Escape') return
+        const first = state.reminders.find((reminder) => state.nodes.has(keyOf(reminder)))
+        if (first) snooze(first)
+      }
+
       state.timer = setInterval(poll, REMINDER_POLL_MS)
       document.addEventListener('visibilitychange', onVisibility)
+      document.addEventListener('keydown', onKeyDown)
       poll()
 
       return () => {
         state.stopped = true
         clearInterval(state.timer)
-        if (state.nextTimer) clearTimeout(state.nextTimer)
         document.removeEventListener('visibilitychange', onVisibility)
-        removeModal()
+        document.removeEventListener('keydown', onKeyDown)
+        for (const node of state.nodes.values()) {
+          try { node.remove() } catch { /* ignore */ }
+        }
+        state.nodes.clear()
+        if (state.container) {
+          try { state.container.remove() } catch { /* ignore */ }
+          state.container = null
+          state.more = null
+        }
       }
     }
 
@@ -794,12 +1106,12 @@ window.__ModuleLoader__.load({
         })
       }
 
-      // 关注嘉宾提醒弹窗：独立于当前视图，轮询 /coserwiki/data
-      ctx.effect(() => installReminderModal(() => {
+      // 关注嘉宾提醒：右下角轻提示，独立于当前视图，轮询 /coserwiki/reminders
+      ctx.effect(() => installReminderToasts(() => {
         try {
           if (right && typeof right.openTab === 'function') right.openTab(KIND)
         } catch { /* ignore */ }
-      }), 'coserwiki-reminder.modal')
+      }), 'coserwiki-reminder.toasts')
 
       // 有新活动时自动打开右侧栏（每次页面加载最多一次）
       ctx.effect(() => {

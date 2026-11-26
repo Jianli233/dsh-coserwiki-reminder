@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "CoserWiki watchlist",
-    "description": "Browse coserwiki cosplay events by city. Events featuring your watched cosplayers are marked and pop up one month and one week before they start. Edit the watchlist in Settings.",
+    "title": "CoserWiki events",
+    "description": "Browse coserwiki cosplay events by city or keyword, expand guest rosters, and get bottom-right toasts for events featuring your watched cosplayers at reminder times you choose (one month and one week ahead by default), plus calendar export. Watchlist and timing are editable in Settings.",
     "detail": "docs/DETAIL.md"
   }
 }
